@@ -73,7 +73,43 @@ internal class Ejemplos
     //Eliminar un alumno por clave y listar por consola los alumnos
     public static void EjemploDictionary()
     {
+        CasoDictionary casoDictionary = new();
 
+        //Agregar 3 alumnos al diccionario
+        casoDictionary.AgregarAlumno(new Alumno(58012, "Abigail", 7.5));
+        casoDictionary.AgregarAlumno(new Alumno(58612, "Carlos", 6.5));
+        casoDictionary.AgregarAlumno(new Alumno(60123, "Nila", 8));
+
+        //Listar por consola los alumnos
+        Console.WriteLine("-------- Lista de Alumnos en el Diccionario --------");
+        foreach(KeyValuePair<int, Alumno> entrada in casoDictionary.ObtenerDiccionario())
+        {
+            Console.WriteLine($"Clave [{entrada.Key}]: {entrada.Value}");
+        }
+
+        //Buscar un alumno por clave y mostrar por consola
+        Console.WriteLine("\n--- Buscar legajo: 58612 ---");
+        Alumno? alumnoEncontrado = casoDictionary.BuscarPorClave(58612);
+        if( alumnoEncontrado is not null)
+        {
+            Console.WriteLine($"Encontrado: {alumnoEncontrado}");
+        }
+
+        //Buscar un alumno por clave, pero que no exista, y mostrar por consola el texto "No existe"
+        Console.WriteLine("\n--- Buscar legajo: 60105 ---");
+        Alumno? alumnoNoExiste = casoDictionary.BuscarPorClave(60105);
+        if (alumnoNoExiste is null)
+        {
+            Console.WriteLine("No existe");
+        }
+
+        //Eliminar un alumno por clave y listar por consola los alumnos
+        Console.WriteLine("\n--- Eliminar legajo: 60123 ---");
+        casoDictionary.EliminarPorClave(60123);
+        foreach(var alumno in casoDictionary.ObtenerDiccionario().Values)
+        {
+            Console.WriteLine(alumno);
+        }
     }
 
     //Realizar una llamada a cada método definido en CasoLinq y mostar por consola según corresponda
