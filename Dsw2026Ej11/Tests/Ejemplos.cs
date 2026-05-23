@@ -115,6 +115,42 @@ internal class Ejemplos
     //Realizar una llamada a cada método definido en CasoLinq y mostar por consola según corresponda
     public static void EjemploLinq()
     {
+        var casoLinq = new CasoLinq();
 
+        Console.WriteLine("-------- Resultados de consultas LINQ --------");
+        Console.WriteLine($"Primero: {casoLinq.GetPrimero().Titulo}");
+        Console.WriteLine($"Ultimo: {casoLinq.GetUltimo().Titulo}");
+        Console.WriteLine($"Suma total de precios: {casoLinq.GetTotalPrecios():C}");
+        Console.WriteLine($"Promedio de Precios: {casoLinq.GetPromedioPrecios():C}");
+
+        Console.WriteLine("\n--- Libros con ID > 15 ---");
+        foreach (var libro in casoLinq.GetListById())
+        {
+            Console.WriteLine($"ID: {libro.Id} - {libro.Titulo}");
+        }
+
+        Console.WriteLine("\n--- Lista de Titulos y Precios ---");
+        foreach(var libro in casoLinq.GetLibros())
+        {
+            Console.WriteLine(libro);
+        }
+        
+        var libroMasCaro = casoLinq.GetMayorPrecio();
+        Console.WriteLine($"\nLibro mas caro: {libroMasCaro.Titulo} ({libroMasCaro.Precio:C})");
+
+        var libroMasBarato = casoLinq.GetMenorPrecio();
+        Console.WriteLine($"\nLibro mas barato: {libroMasBarato.Titulo} ({libroMasBarato.Precio:C})");
+
+        Console.WriteLine("\n--- Libro con precio mayor al promedio ---");
+        foreach (var libro in casoLinq.GetMayorPromedio())
+        {
+            Console.WriteLine($"{libro.Titulo}: {libro.Precio:C}");
+        }
+
+        Console.WriteLine("\n--- Libros ordenados por titulo descendiente ----");
+        foreach (var libro in casoLinq.GetOrdenados())
+        {
+            Console.WriteLine(libro.Titulo);
+        }
     }
 }
